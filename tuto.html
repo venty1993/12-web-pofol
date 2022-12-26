@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            width: 400px;
+            margin: 0 auto;
+        }
+        .buttons {
+            display: flex;
+            width: 200px;
+            margin: 0 auto;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: black;
+            padding: 8px;
+        }
+
+        .circle.selectied{
+            background-color: red;
+        }
+
+        ul > li {
+            
+            list-style: none;
+            width: 100%;
+            border: 1px solid gray;
+            background-color: pink;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            font-size: 56px;
+            font-weight: 900;
+
+        }
+
+        .tap-menu {
+            display: none;
+        }
+
+        .tap-menu.active {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>아메리카노</h2>
+    <div class="button-container">
+        <div class="index-button left">왼</div>
+        <div class="buttons">
+            <div class="circle selectied"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="index-button right">오</div>
+    </div>
+    <ul>
+        <li class="tap-menu ame active">1</li>
+        <li class="tap-menu ame2">2</li>
+        <li class="tap-menu ame3">3</li>
+        <li class="tap-menu ame4">4</li>
+        <li class="tap-menu ame5">5</li>
+    </ul>
+
+    <script>
+        const radioButton = document.getElementsByClassName('circle');
+        const tapMenu = document.getElementsByClassName('tap-menu');
+        const indexButton = document.getElementsByClassName('index-button');
+
+        let index = 0;
+
+        // left
+        indexButton[0].addEventListener('click', () => {
+            if(index===0){
+                index = 4;
+            }else {
+                index--;
+            }
+            tapReset();
+            tapMenu[index].classList.add('active');
+
+        })
+        // right
+        indexButton[1].addEventListener('click', () => {
+            if(index===4){
+                index = 0;
+            }else {
+                index++;
+            }
+            tapReset();
+            tapMenu[index].classList.add('active');
+
+        })
+
+
+        for(let j = 0 ; j <radioButton.length ; j ++ ){
+
+            radioButton[j].addEventListener('click', () => {
+                index = j ;
+                console.log(index);
+                tapReset();
+                tapMenu[j].classList.add('active');
+            })
+        }
+
+
+        function tapReset() {
+            for(let i = 0 ; i < radioButton.length; i ++) {
+                    tapMenu[i].classList.remove('active');
+                }
+        }
+    </script>
+</body>
+</html>
