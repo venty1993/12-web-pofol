@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --glitch-position : 40%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        section {
+            background-image: url(S1-4_파일형식.jpg);
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .glitch-distortion {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-image: url(S1-4_파일형식.jpg);
+            /* 
+            js 통제값
+            filter: hue-rotate(45deg);
+            clip-path: inset(var(--glitch-position) 0px calc(100% - var(--glitch-position) - 10px) 0px);
+            transform: translateX(10px);
+            */
+        }
+    </style>
+</head>
+<body>
+    <section id="glitch-intro">
+
+    </section>
+
+    <script>
+        
+        setInterval(() => {
+            makeGlitchLine()
+        }, 10);
+
+
+        function makeGlitchLine(){
+
+            const glitchIntro = document.getElementById('glitch-intro');
+            const glitchBox = document.createElement('div');
+            const boxPosition = makeRandom(100);
+            const startXPosition = makeRandom(100);
+            const endXPosition = makeRandom(100-startXPosition)+startXPosition;
+            glitchBox.classList.add('glitch-distortion');
+            
+            glitchBox.style.filter = `hue-rotate(${makeRandom(360)}deg)`; 
+            glitchBox.style.clipPath = `inset(${boxPosition}% ${startXPosition}% calc(100% - ${boxPosition}% - 10px) ${endXPosition}%)`;
+            glitchBox.style.transform = `translateX(${makeRandom(1)*20-10}px)`;
+            
+            setTimeout(() => {
+                glitchIntro.removeChild(glitchBox)
+            }, makeRandom(500));
+
+            
+            glitchIntro.appendChild(glitchBox);
+            
+            function makeRandom(으엙) {
+                return Math.floor(Math.random() * 으엙)+1;
+            }
+        }
+
+            
+            
+
+    </script>
+</body>
+</html>
