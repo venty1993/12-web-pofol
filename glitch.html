@@ -25,6 +25,7 @@
             height: 100%;
             position: absolute;
             background-image: url(S1-4_파일형식.jpg);
+            transform: scale(1.1);
             /* 
             js 통제값
             filter: hue-rotate(45deg);
@@ -42,8 +43,24 @@
     <script>
         
         setInterval(() => {
-            makeGlitchLine()
-        }, 10);
+            glit();
+        }, 1000);
+        
+        function glit() {
+            
+            let glitchAnimation =  setInterval(() => {
+                makeGlitchLine()
+            }, 5);
+
+            setTimeout(() => {
+                clearInterval(glitchAnimation);
+            }, makeRandom(500)+200);
+
+        }
+
+
+
+           
 
 
         function makeGlitchLine(){
@@ -51,26 +68,27 @@
             const glitchIntro = document.getElementById('glitch-intro');
             const glitchBox = document.createElement('div');
             const boxPosition = makeRandom(100);
-            const startXPosition = makeRandom(100);
-            const endXPosition = makeRandom(100-startXPosition)+startXPosition;
+            const positionStartEnd = [makeRandom(50)-75,(makeRandom(50)-25)];
+
+            console.log(positionStartEnd);
+
             glitchBox.classList.add('glitch-distortion');
             
             glitchBox.style.filter = `hue-rotate(${makeRandom(360)}deg)`; 
-            glitchBox.style.clipPath = `inset(${boxPosition}% ${startXPosition}% calc(100% - ${boxPosition}% - 10px) ${endXPosition}%)`;
-            glitchBox.style.transform = `translateX(${makeRandom(1)*20-10}px)`;
+            glitchBox.style.clipPath = `inset(${boxPosition}% ${positionStartEnd[1]}% calc(100% - ${boxPosition}% - 10px) ${positionStartEnd[0]}%)`;
             
             setTimeout(() => {
                 glitchIntro.removeChild(glitchBox)
-            }, makeRandom(500));
+            }, makeRandom(100));
 
             
             glitchIntro.appendChild(glitchBox);
             
-            function makeRandom(으엙) {
-                return Math.floor(Math.random() * 으엙)+1;
-            }
         }
-
+        
+        function makeRandom(range) {
+            return Math.floor(Math.random() * range)+1;
+        }
             
             
 
